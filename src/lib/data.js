@@ -2,17 +2,48 @@ import { ethers } from 'ethers';
 import { ARC_CONFIG, BLOCKS_TO_FETCH, WHALE_THRESHOLD } from './config';
 
 let provider = null;
+let currentRpcUrl = null;
+
+function getRpcUrl() {
+  if (typeof window === 'undefined') return ARC_CONFIG.rpcUrl;
+  return localStorage.getItem('arc-rpc-url') || ARC_CONFIG.rpcUrl;
+}
 
 function getProvider() {
+  const rpcUrl = getRpcUrl();
+  
+  if (currentRpcUrl !== rpcUrl) {
+    provider = null;
+    currentRpcUrl = rpcUrl;
+  }
+  
   if (!provider) {
-    provider = new ethers.JsonRpcProvider(ARC_CONFIG.rpcUrl);
+    provider = new ethers.JsonRpcProvider(rpcUrl);
   }
   return provider;
+}
+
+export function resetProvider() {
+  provider = null;
+  currentRpcUrl = null;
 }
 
 export function formatAddress(address) {
   if (!address) return '';
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
+}
+
+async function fetchWithThrottle(promises, batchSize = 3) {
+  const results = [];
+  for (let i = 0; i < promises.length; i += batchSize) {
+    const batch = promises.slice(i, i + batchSize);
+    const batchResults = await Promise.all(batch.map(p => p().catch(() => null)));
+    results.push(...batchResults);
+    if (i + batchSize < promises.length) {
+      await new Promise(r => setTimeout(r, 200));
+    }
+  }
+  return results;
 }
 
 export async function fetchAllData() {
@@ -24,24 +55,30 @@ export async function fetchAllData() {
     p.getNetwork()
   ]);
 
-  const blockPromises = [];
-  for (let i = 0; i < BLOCKS_TO_FETCH; i++) {
-    blockPromises.push(p.getBlock(blockNumber - i, true).catch(() => null));
+  await new Promise(r => setTimeout(r, 150));
+
+  const blocksToFetch = Math.min(BLOCKS_TO_FETCH, 5);
+  const blockFetchers = [];
+  for (let i = 0; i < blocksToFetch; i++) {
+    blockFetchers.push(() => p.getBlock(blockNumber - i, true));
   }
   
-  const transferTopic = ethers.id('Transfer(address,address,uint256)');
-  const logsPromise = p.getLogs({
-    fromBlock: blockNumber - BLOCKS_TO_FETCH,
-    toBlock: blockNumber,
-    topics: [transferTopic]
-  }).catch(() => []);
-
-  const [blocks, logs] = await Promise.all([
-    Promise.all(blockPromises),
-    logsPromise
-  ]);
-
+  const blocks = await fetchWithThrottle(blockFetchers, 2);
   const validBlocks = blocks.filter(b => b !== null);
+
+  await new Promise(r => setTimeout(r, 150));
+
+  let logs = [];
+  try {
+    const transferTopic = ethers.id('Transfer(address,address,uint256)');
+    logs = await p.getLogs({
+      fromBlock: blockNumber - blocksToFetch,
+      toBlock: blockNumber,
+      topics: [transferTopic]
+    });
+  } catch (e) {
+    console.log('Logs fetch skipped due to rate limit');
+  }
 
   const stats = {
     blockNumber,
