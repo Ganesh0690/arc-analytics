@@ -25,14 +25,17 @@ export default function RpcSettings({ onRpcChange }) {
   const handleSave = () => {
     setRpcUrl(rpcUrl);
     setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
-    if (onRpcChange) onRpcChange(rpcUrl);
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   };
 
   const handleReset = () => {
     setRpcUrlState(DEFAULT_RPC);
     setRpcUrl(DEFAULT_RPC);
-    if (onRpcChange) onRpcChange(DEFAULT_RPC);
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   };
 
   return (
