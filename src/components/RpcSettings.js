@@ -42,30 +42,30 @@ export default function RpcSettings({ onRpcChange }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="w-10 h-10 flex items-center justify-center rounded-lg bg-arc-card border border-arc-border hover:border-arc-border-light transition-colors"
+        className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 transition-colors"
         title="RPC Settings"
       >
-        <Settings className="w-4 h-4 text-arc-muted" />
+        <Settings className="w-4 h-4 text-white" />
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="w-full max-w-lg arc-card p-6 relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="w-full max-w-lg bg-[#5a8a7a] border border-white/20 rounded-2xl p-6 relative">
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 text-arc-muted hover:text-arc-text"
+              className="absolute top-4 right-4 text-white/60 hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <h2 className="text-xl font-semibold text-arc-text mb-2">RPC Settings</h2>
-            <p className="text-arc-muted text-sm mb-6">
+            <h2 className="text-xl font-semibold text-white mb-2">RPC Settings</h2>
+            <p className="text-white/60 text-sm mb-6">
               Configure a custom RPC endpoint to avoid rate limits
             </p>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-arc-muted uppercase tracking-wide mb-2">
+                <label className="block text-xs font-semibold text-white/50 uppercase tracking-wide mb-2">
                   RPC URL
                 </label>
                 <input
@@ -73,32 +73,32 @@ export default function RpcSettings({ onRpcChange }) {
                   value={rpcUrl}
                   onChange={(e) => setRpcUrlState(e.target.value)}
                   placeholder="https://rpc.testnet.arc.network"
-                  className="w-full px-4 py-3 bg-arc-bg-light border border-arc-border rounded-lg text-arc-text font-mono text-sm focus:outline-none focus:border-arc-teal"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white text-sm focus:outline-none focus:border-white/40"
                 />
               </div>
 
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleSave}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-arc-teal text-arc-bg font-medium rounded-lg hover:bg-arc-teal-light transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-white/20 text-white font-medium rounded-lg hover:bg-white/30 transition-colors"
                 >
                   {saved ? <Check className="w-4 h-4" /> : null}
                   {saved ? 'Saved!' : 'Save & Reload'}
                 </button>
                 <button
                   onClick={handleReset}
-                  className="px-5 py-2.5 text-arc-muted hover:text-arc-text transition-colors"
+                  className="px-5 py-2.5 text-white/60 hover:text-white transition-colors"
                 >
                   Reset to Default
                 </button>
               </div>
 
-              <div className="mt-6 p-4 bg-arc-bg-light rounded-lg border border-arc-border">
-                <p className="text-xs text-arc-muted">
-                  <strong className="text-arc-secondary">Tip:</strong> You can get a free RPC endpoint from{' '}
-                  <a href="https://www.quicknode.com" target="_blank" rel="noopener noreferrer" className="text-arc-teal hover:underline">QuickNode</a>,{' '}
-                  <a href="https://www.alchemy.com" target="_blank" rel="noopener noreferrer" className="text-arc-teal hover:underline">Alchemy</a>, or{' '}
-                  <a href="https://www.infura.io" target="_blank" rel="noopener noreferrer" className="text-arc-teal hover:underline">Infura</a>
+              <div className="mt-6 p-4 bg-white/10 rounded-lg">
+                <p className="text-xs text-white/50">
+                  <strong className="text-white/70">Tip:</strong> You can get a free RPC endpoint from{' '}
+                  <a href="https://www.quicknode.com" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:underline">QuickNode</a>,{' '}
+                  <a href="https://www.alchemy.com" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:underline">Alchemy</a>, or{' '}
+                  <a href="https://www.infura.io" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:underline">Infura</a>
                 </p>
               </div>
             </div>

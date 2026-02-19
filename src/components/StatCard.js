@@ -4,10 +4,8 @@ export function Skeleton({ className = '' }) {
 
 export function SectionLabel({ children }) {
   return (
-    <p className="arc-label">
-      <span className="text-arc-accent">{'{'}</span>
-      <span className="arc-label-text">{children}</span>
-      <span className="text-arc-accent">{'}'}</span>
+    <p className="text-sm tracking-[0.2em] uppercase text-white/50 font-semibold mb-2">
+      {children}
     </p>
   );
 }
@@ -15,7 +13,7 @@ export function SectionLabel({ children }) {
 export default function StatCard({ label, value, unit, loading, highlighted }) {
   if (loading) {
     return (
-      <div className="arc-card p-6">
+      <div className="arc-card p-7">
         <Skeleton className="h-3 w-24 mb-5" />
         <Skeleton className="h-10 w-32" />
       </div>
@@ -23,13 +21,13 @@ export default function StatCard({ label, value, unit, loading, highlighted }) {
   }
 
   return (
-    <div className={`arc-card p-6 ${highlighted ? 'border-arc-teal/30' : ''}`}>
-      <p className="arc-stat-label mb-4">{label}</p>
+    <div className={`arc-card p-7 ${highlighted ? 'border-white/30' : ''}`}>
+      <p className="arc-stat-label mb-5">{label}</p>
       <div className="flex items-baseline gap-2">
-        <span className={`arc-stat-value ${highlighted ? 'text-arc-teal-light' : ''}`}>
+        <span className={`arc-stat-value ${highlighted ? 'text-shadow-glow' : ''}`}>
           {value}
         </span>
-        {unit && <span className="text-sm text-arc-muted font-medium">{unit}</span>}
+        {unit && <span className="text-base text-white/50 font-medium">{unit}</span>}
       </div>
     </div>
   );

@@ -1,36 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Arc Navy Blue Background */
-  --arc-bg: #0c1829;
-  --arc-bg-light: #122035;
-  --arc-bg-card: #14253a;
-  --arc-bg-card-hover: #1a2d45;
-  
-  /* Borders */
-  --arc-border: #1e3a5f;
-  --arc-border-light: #2a4a72;
-  
-  /* Text */
-  --arc-text: #e6edf5;
-  --arc-text-secondary: #a3b8cc;
-  --arc-text-muted: #6b8299;
-  
-  /* Orange/Amber Accent (for labels) */
-  --arc-accent: #c98a4b;
-  --arc-accent-light: #daa05d;
-  
-  /* Teal/Cyan for highlights */
-  --arc-teal: #4a9e97;
-  --arc-teal-light: #5cb8b0;
-  
-  /* Cream for light sections */
-  --arc-cream: #f0ebe0;
-  --arc-cream-dark: #e5dfd2;
+  --arc-bg: #5a8a7a;
+  --arc-bg-light: rgba(255, 255, 255, 0.1);
+  --arc-bg-card: rgba(255, 255, 255, 0.1);
+  --arc-bg-card-hover: rgba(255, 255, 255, 0.15);
+  --arc-border: rgba(255, 255, 255, 0.15);
+  --arc-border-light: rgba(255, 255, 255, 0.25);
+  --arc-text: #ffffff;
+  --arc-text-secondary: rgba(255, 255, 255, 0.8);
+  --arc-text-muted: rgba(255, 255, 255, 0.5);
+  --arc-accent: #98FB98;
 }
 
 * {
@@ -44,7 +28,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   background: var(--arc-bg);
   color: var(--arc-text);
   -webkit-font-smoothing: antialiased;
@@ -53,7 +37,7 @@ body {
 }
 
 ::selection {
-  background: var(--arc-accent);
+  background: rgba(255, 255, 255, 0.3);
   color: var(--arc-bg);
 }
 
@@ -66,104 +50,83 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--arc-border);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--arc-border-light);
+  background: rgba(255, 255, 255, 0.3);
 }
 
-.font-mono {
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* Arc Section Label with orange braces */
-.arc-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.arc-label-text {
-  color: var(--arc-accent);
-}
-
-/* Cards */
 .arc-card {
   background: var(--arc-bg-card);
+  backdrop-filter: blur(20px);
   border: 1px solid var(--arc-border);
-  border-radius: 16px;
-  transition: all 0.2s ease;
+  border-radius: 20px;
+  transition: all 0.3s ease;
 }
 
 .arc-card:hover {
-  border-color: var(--arc-border-light);
   background: var(--arc-bg-card-hover);
+  border-color: var(--arc-border-light);
+  transform: translateY(-2px);
 }
 
 .arc-card-inner {
-  background: var(--arc-bg-light);
-  border: 1px solid var(--arc-border);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
 }
 
-/* Large stat values - thin weight like Arc */
 .arc-stat-value {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
-  font-size: 36px;
+  font-size: 38px;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
   color: var(--arc-text);
 }
 
 .arc-stat-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--arc-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 }
 
-/* Heading - ultra light weight like Arc */
 .arc-heading {
   font-weight: 300;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
   color: var(--arc-text);
 }
 
-/* Buttons */
 .arc-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
   transition: all 0.2s ease;
   cursor: pointer;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .arc-btn-primary {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.15);
   color: var(--arc-text);
   border: 1px solid var(--arc-border-light);
 }
 
 .arc-btn-primary:hover {
-  background: var(--arc-bg-light);
-  border-color: var(--arc-text-muted);
+  background: rgba(255, 255, 255, 0.25);
 }
 
-/* Links */
 .arc-link {
   color: var(--arc-text-secondary);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   transition: color 0.2s ease;
   text-decoration: none;
@@ -173,34 +136,24 @@ body {
   color: var(--arc-text);
 }
 
-/* Divider */
-.arc-divider {
-  height: 1px;
-  background: var(--arc-border);
-  width: 100%;
-}
-
-/* Badge */
 .arc-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: rgba(201, 138, 75, 0.1);
-  border: 1px solid rgba(201, 138, 75, 0.25);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--arc-border-light);
   border-radius: 100px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
-  color: var(--arc-accent);
 }
 
-/* Skeleton Loading */
 .skeleton {
   background: linear-gradient(
     90deg,
-    var(--arc-bg-card) 0%,
-    var(--arc-bg-card-hover) 50%,
-    var(--arc-bg-card) 100%
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.06) 100%
   );
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s ease-in-out infinite;
@@ -228,25 +181,4 @@ body {
 
 .animate-pulse-dot {
   animation: pulse-dot 2s ease-in-out infinite;
-}
-
-/* Arc curved line decoration */
-.arc-curve-container {
-  position: fixed;
-  right: -10%;
-  top: 10%;
-  width: 50%;
-  height: 80%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.arc-curve {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 1px solid rgba(74, 158, 151, 0.12);
-  border-radius: 50%;
-  transform: scale(1.5);
 }
