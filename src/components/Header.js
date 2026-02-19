@@ -3,7 +3,7 @@ import RpcSettings from './RpcSettings';
 
 export default function Header({ onRefresh, loading, onRpcChange }) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-xl border-b border-white/15">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/15">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="flex items-center justify-between h-[72px]">
           <div className="flex items-center gap-3">
@@ -37,7 +37,7 @@ export default function Header({ onRefresh, loading, onRpcChange }) {
             <button
               onClick={onRefresh}
               disabled={loading}
-              className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 transition-colors disabled:opacity-50"
+              className="w-10 h-10 flex items-center justify-center rounded-xl bg-black/20 border border-white/20 hover:bg-black/30 transition-colors disabled:opacity-50"
             >
               <RefreshCw className={`w-4 h-4 text-white ${loading ? 'animate-spin' : ''}`} />
             </button>
