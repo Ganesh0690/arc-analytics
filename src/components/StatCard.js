@@ -4,7 +4,7 @@ export function Skeleton({ className = '' }) {
 
 export function SectionLabel({ children }) {
   return (
-    <p className="text-sm tracking-[0.2em] uppercase text-white/70 font-semibold mb-2">
+    <p className="text-sm tracking-[0.2em] uppercase text-white/75 font-semibold mb-2">
       {children}
     </p>
   );
@@ -21,13 +21,13 @@ export default function StatCard({ label, value, unit, loading, highlighted }) {
   }
 
   return (
-    <div className={`arc-card p-7 ${highlighted ? 'border-white/40 bg-black/30' : ''}`}>
+    <div className={`arc-card p-7 ${highlighted ? 'border-white/40 bg-black/35' : ''}`}>
       <p className="arc-stat-label mb-5">{label}</p>
       <div className="flex items-baseline gap-2">
         <span className="arc-stat-value">
           {value}
         </span>
-        {unit && <span className="text-lg text-white/70 font-medium">{unit}</span>}
+        {unit && <span className="text-base text-white/70 font-medium font-sans">{unit}</span>}
       </div>
     </div>
   );

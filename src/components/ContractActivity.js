@@ -7,9 +7,9 @@ import StatCard, { Skeleton, SectionLabel } from './StatCard';
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-white/15 backdrop-blur-xl border border-white/20 rounded-xl p-4">
-        <p className="text-white/60 text-xs mb-2">{payload[0].payload.fullAddress}</p>
-        <p className="text-white font-semibold">{payload[0].value} calls</p>
+      <div className="bg-[#2a4a3a] border border-white/30 rounded-xl p-4 shadow-xl">
+        <p className="text-white/80 text-xs mb-2 font-sans">{payload[0].payload.fullAddress}</p>
+        <p className="text-white font-semibold text-lg font-sans">{payload[0].value} calls</p>
       </div>
     );
   }
@@ -29,7 +29,7 @@ export default function ContractActivity({ contracts, loading }) {
       <div>
         <SectionLabel>Contract Activity</SectionLabel>
         <h2 className="arc-heading text-3xl mt-2">Smart contract interactions</h2>
-        <p className="text-white/70 mt-3 text-lg">Most active contracts in the last 10 blocks</p>
+        <p className="text-white/80 mt-3 text-lg">Most active contracts in the last 10 blocks</p>
       </div>
 
       <div className="grid grid-cols-3 gap-5">
@@ -55,39 +55,41 @@ export default function ContractActivity({ contracts, loading }) {
               <BarChart data={chartData} layout="vertical" margin={{ top: 10, right: 20, left: 10, bottom: 10 }}>
                 <XAxis 
                   type="number" 
-                  stroke="rgba(255,255,255,0.4)" 
+                  stroke="rgba(255,255,255,0.6)" 
                   fontSize={12}
+                  fontFamily="Inter, sans-serif"
                   tickLine={false}
-                  axisLine={{ stroke: 'rgba(255,255,255,0.15)' }}
+                  axisLine={{ stroke: 'rgba(255,255,255,0.2)' }}
                 />
                 <YAxis 
                   type="category" 
                   dataKey="name" 
-                  stroke="rgba(255,255,255,0.4)" 
+                  stroke="rgba(255,255,255,0.6)" 
                   fontSize={12}
+                  fontFamily="Inter, sans-serif"
                   tickLine={false}
                   axisLine={false}
                   width={90}
                 />
-                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.05)' }} />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.08)' }} />
                 <Bar dataKey="calls" radius={[0, 6, 6, 0]}>
                   {chartData.map((_, index) => (
                     <Cell 
                       key={`cell-${index}`} 
-                      fill={`rgba(255,255,255,${0.7 - index * 0.07})`}
+                      fill={`rgba(255,255,255,${0.8 - index * 0.08})`}
                     />
                   ))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           ) : (
-            <div className="h-full flex items-center justify-center text-white/50">No contract activity</div>
+            <div className="h-full flex items-center justify-center text-white/60">No contract activity</div>
           )}
         </div>
       </div>
 
       <div className="arc-card overflow-hidden">
-        <div className="p-6 border-b border-white/10">
+        <div className="p-6 border-b border-white/15">
           <SectionLabel>Contract Rankings</SectionLabel>
         </div>
         
@@ -107,17 +109,17 @@ export default function ContractActivity({ contracts, loading }) {
               <span className="text-4xl">📄</span>
             </div>
             <p className="text-white font-medium text-lg">No contract activity</p>
-            <p className="text-white/50 mt-2">Contract interactions will appear here when detected</p>
+            <p className="text-white/60 mt-2">Contract interactions will appear here when detected</p>
           </div>
         ) : (
-          <div className="divide-y divide-white/5">
+          <div className="divide-y divide-white/10">
             {contracts.map((contract, i) => (
               <div key={contract.address} className="flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
                 <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-semibold text-sm ${
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-semibold text-sm font-sans ${
                     i === 0 
-                      ? 'bg-white/20 text-white border border-white/30' 
-                      : 'bg-white/10 text-white/70 border border-white/15'
+                      ? 'bg-white/25 text-white border border-white/35' 
+                      : 'bg-white/10 text-white/80 border border-white/20'
                   }`}>
                     {i + 1}
                   </div>
@@ -126,25 +128,25 @@ export default function ContractActivity({ contracts, loading }) {
                       href={`${ARC_CONFIG.explorerUrl}/address/${contract.address}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm text-white/90 hover:text-white transition-colors"
+                      className="inline-flex items-center gap-1.5 text-sm text-white hover:text-white/80 transition-colors font-sans font-medium"
                     >
                       {formatAddress(contract.address)}
                       <ArrowUpRight className="w-3 h-3" />
                     </a>
-                    <p className="text-xs text-white/40 mt-1">Last active: Block #{contract.lastBlock}</p>
+                    <p className="text-xs text-white/50 mt-1 font-sans">Last active: Block #{contract.lastBlock.toLocaleString()}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center gap-6">
                   <div className="text-right">
-                    <p className={`text-sm font-semibold ${i === 0 ? 'text-white' : 'text-white/80'}`}>
+                    <p className={`text-sm font-semibold font-sans ${i === 0 ? 'text-white' : 'text-white/90'}`}>
                       {contract.calls}
                     </p>
-                    <p className="text-xs text-white/40">calls</p>
+                    <p className="text-xs text-white/50">calls</p>
                   </div>
                   <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-white/50 rounded-full transition-all duration-500"
+                      className="h-full bg-white/60 rounded-full transition-all duration-500"
                       style={{ width: `${(contract.calls / (contracts[0]?.calls || 1)) * 100}%` }}
                     />
                   </div>

@@ -4,9 +4,9 @@ import StatCard, { Skeleton, SectionLabel } from './StatCard';
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-black/60 backdrop-blur-xl border border-white/20 rounded-xl p-4">
-        <p className="text-white/70 text-xs mb-2">Block #{label}</p>
-        <p className="text-white font-semibold text-lg">{payload[0].value.toFixed(4)} gwei</p>
+      <div className="bg-[#2a4a3a] border border-white/30 rounded-xl p-4 shadow-xl">
+        <p className="text-white/80 text-xs mb-2 font-sans">Block #{label}</p>
+        <p className="text-white font-semibold text-lg font-sans">{payload[0].value.toFixed(4)} gwei</p>
       </div>
     );
   }
@@ -61,15 +61,17 @@ export default function GasTracker({ stats, gasHistory, loading }) {
                 </defs>
                 <XAxis 
                   dataKey="block" 
-                  stroke="rgba(255,255,255,0.5)" 
+                  stroke="rgba(255,255,255,0.6)" 
                   fontSize={12}
+                  fontFamily="Inter, sans-serif"
                   tickLine={false}
                   axisLine={{ stroke: 'rgba(255,255,255,0.2)' }}
                   dy={10}
                 />
                 <YAxis 
-                  stroke="rgba(255,255,255,0.5)" 
+                  stroke="rgba(255,255,255,0.6)" 
                   fontSize={12}
+                  fontFamily="Inter, sans-serif"
                   tickLine={false}
                   axisLine={false}
                   tickFormatter={(v) => v.toFixed(2)}
@@ -97,19 +99,19 @@ export default function GasTracker({ stats, gasHistory, loading }) {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="arc-card-inner p-6 text-center">
-            <p className="text-white/60 text-xs font-semibold uppercase tracking-wide mb-4">Simple Transfer</p>
-            <p className="text-3xl font-medium text-white">{estimateCost(21000)}</p>
-            <p className="text-white/50 text-sm mt-2">USDC · 21,000 gas</p>
+            <p className="text-white/70 text-xs font-semibold uppercase tracking-wide mb-4">Simple Transfer</p>
+            <p className="text-3xl font-semibold text-white font-sans">{estimateCost(21000)}</p>
+            <p className="text-white/60 text-sm mt-2 font-sans">USDC · 21,000 gas</p>
           </div>
           <div className="arc-card-inner p-6 text-center">
-            <p className="text-white/60 text-xs font-semibold uppercase tracking-wide mb-4">Token Transfer</p>
-            <p className="text-3xl font-medium text-white">{estimateCost(65000)}</p>
-            <p className="text-white/50 text-sm mt-2">USDC · 65,000 gas</p>
+            <p className="text-white/70 text-xs font-semibold uppercase tracking-wide mb-4">Token Transfer</p>
+            <p className="text-3xl font-semibold text-white font-sans">{estimateCost(65000)}</p>
+            <p className="text-white/60 text-sm mt-2 font-sans">USDC · 65,000 gas</p>
           </div>
           <div className="arc-card-inner p-6 text-center">
-            <p className="text-white/60 text-xs font-semibold uppercase tracking-wide mb-4">Contract Call</p>
-            <p className="text-3xl font-medium text-white">{estimateCost(150000)}</p>
-            <p className="text-white/50 text-sm mt-2">USDC · 150,000 gas</p>
+            <p className="text-white/70 text-xs font-semibold uppercase tracking-wide mb-4">Contract Call</p>
+            <p className="text-3xl font-semibold text-white font-sans">{estimateCost(150000)}</p>
+            <p className="text-white/60 text-sm mt-2 font-sans">USDC · 150,000 gas</p>
           </div>
         </div>
       </div>

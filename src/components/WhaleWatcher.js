@@ -12,7 +12,7 @@ export default function WhaleWatcher({ whales, loading }) {
       <div>
         <SectionLabel>Whale Activity</SectionLabel>
         <h2 className="arc-heading text-3xl mt-2">Large token transfers</h2>
-        <p className="text-white/70 mt-3 text-lg">Monitoring transfers ≥ {WHALE_THRESHOLD} USDC in recent blocks</p>
+        <p className="text-white/80 mt-3 text-lg">Monitoring transfers ≥ {WHALE_THRESHOLD.toLocaleString()} USDC in recent blocks</p>
       </div>
 
       <div className="grid grid-cols-3 gap-5">
@@ -22,7 +22,7 @@ export default function WhaleWatcher({ whales, loading }) {
       </div>
 
       <div className="arc-card overflow-hidden">
-        <div className="p-6 border-b border-white/10">
+        <div className="p-6 border-b border-white/15">
           <SectionLabel>Transfer History</SectionLabel>
         </div>
         
@@ -44,32 +44,32 @@ export default function WhaleWatcher({ whales, loading }) {
               <span className="text-4xl">🐋</span>
             </div>
             <p className="text-white font-medium text-lg">No whale activity detected</p>
-            <p className="text-white/50 mt-2 max-w-sm mx-auto">
-              Large transfers (≥ {WHALE_THRESHOLD} USDC) will appear here when detected in recent blocks
+            <p className="text-white/60 mt-2 max-w-sm mx-auto">
+              Large transfers (≥ {WHALE_THRESHOLD.toLocaleString()} USDC) will appear here when detected in recent blocks
             </p>
           </div>
         ) : (
-          <div className="divide-y divide-white/5">
+          <div className="divide-y divide-white/10">
             {whales.map((whale, i) => (
               <div key={`${whale.hash}-${i}`} className="p-6 hover:bg-white/5 transition-colors">
                 <div className="flex items-center justify-between mb-5">
                   <div className="flex items-center gap-4">
-                    <span className={`px-4 py-2 rounded-lg font-semibold text-sm ${
+                    <span className={`px-4 py-2 rounded-lg font-semibold text-sm font-sans ${
                       whale.value >= 10000 
-                        ? 'bg-red-400/15 text-red-300 border border-red-400/25'
+                        ? 'bg-red-500/25 text-red-200 border border-red-400/30'
                         : whale.value >= 1000
-                        ? 'bg-yellow-400/15 text-yellow-300 border border-yellow-400/25'
-                        : 'bg-white/10 text-white/80 border border-white/20'
+                        ? 'bg-yellow-500/25 text-yellow-200 border border-yellow-400/30'
+                        : 'bg-white/15 text-white border border-white/25'
                     }`}>
                       ${whale.value.toLocaleString()}
                     </span>
-                    <span className="text-sm text-white/50">Block #{whale.block}</span>
+                    <span className="text-sm text-white/70 font-sans">Block #{whale.block.toLocaleString()}</span>
                   </div>
                   <a 
                     href={`${ARC_CONFIG.explorerUrl}/tx/${whale.hash}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
                   >
                     View on Explorer
                     <ArrowUpRight className="w-4 h-4" />
@@ -78,15 +78,15 @@ export default function WhaleWatcher({ whales, loading }) {
                 
                 <div className="flex items-center gap-4">
                   <div className="flex-1 arc-card-inner p-4">
-                    <p className="text-xs text-white/40 uppercase tracking-wide mb-2">From</p>
-                    <p className="text-sm text-white/90">{formatAddress(whale.from)}</p>
+                    <p className="text-xs text-white/50 uppercase tracking-wide mb-2">From</p>
+                    <p className="text-sm text-white font-sans font-medium">{formatAddress(whale.from)}</p>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                    <ArrowRight className="w-4 h-4 text-white/50" />
+                  <div className="w-10 h-10 rounded-full bg-white/15 border border-white/20 flex items-center justify-center flex-shrink-0">
+                    <ArrowRight className="w-4 h-4 text-white/70" />
                   </div>
                   <div className="flex-1 arc-card-inner p-4">
-                    <p className="text-xs text-white/40 uppercase tracking-wide mb-2">To</p>
-                    <p className="text-sm text-white/90">{formatAddress(whale.to)}</p>
+                    <p className="text-xs text-white/50 uppercase tracking-wide mb-2">To</p>
+                    <p className="text-sm text-white font-sans font-medium">{formatAddress(whale.to)}</p>
                   </div>
                 </div>
               </div>

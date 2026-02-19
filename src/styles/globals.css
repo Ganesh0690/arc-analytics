@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,13 +7,13 @@
 :root {
   --arc-bg: #5a8a7a;
   --arc-bg-light: rgba(0, 0, 0, 0.15);
-  --arc-bg-card: rgba(0, 0, 0, 0.2);
-  --arc-bg-card-hover: rgba(0, 0, 0, 0.25);
-  --arc-border: rgba(255, 255, 255, 0.15);
-  --arc-border-light: rgba(255, 255, 255, 0.25);
+  --arc-bg-card: rgba(0, 0, 0, 0.25);
+  --arc-bg-card-hover: rgba(0, 0, 0, 0.32);
+  --arc-border: rgba(255, 255, 255, 0.2);
+  --arc-border-light: rgba(255, 255, 255, 0.3);
   --arc-text: #ffffff;
   --arc-text-secondary: rgba(255, 255, 255, 0.9);
-  --arc-text-muted: rgba(255, 255, 255, 0.6);
+  --arc-text-muted: rgba(255, 255, 255, 0.7);
   --arc-accent: #98FB98;
 }
 
@@ -73,34 +73,40 @@ body {
 }
 
 .arc-card-inner {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
 }
 
 .arc-stat-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 500;
-  font-size: 38px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
   line-height: 1.1;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .arc-stat-label {
-  font-size: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.75);
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
 
 .arc-heading {
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
   letter-spacing: 0.01em;
   line-height: 1.2;
   color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.arc-number {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
 }
 
 .arc-btn {
@@ -117,13 +123,13 @@ body {
 }
 
 .arc-btn-primary {
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.3);
   color: var(--arc-text);
   border: 1px solid var(--arc-border-light);
 }
 
 .arc-btn-primary:hover {
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .arc-link {
@@ -143,7 +149,7 @@ body {
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.25);
   border: 1px solid var(--arc-border-light);
   border-radius: 100px;
   font-size: 13px;
